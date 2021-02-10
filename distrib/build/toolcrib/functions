@@ -162,7 +162,10 @@ function build_tc_stage_3() {
   buildenv gzip 1
   buildenv joe 1
   buildenv m4 1
+  buildenv bison 1
   buildenv make 1
+  buildenv autoconf 1
+  buildenv automake 1
   buildenv patch 1
   buildenv perl 1
   buildenv openssl 1
