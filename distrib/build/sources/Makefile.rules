@@ -39,6 +39,16 @@ ifdef ReConfigure
 endif
 endif
 
+ifdef PRECOMPILE_SCRIPT
+	@echo; echo "running script";echo
+	(cd $(DIR); \
+  FILENAME=$(PRECOMPILE_SCRIPT); \
+  echo; echo $$FILENAME; \
+  [ -f $$FILENAME ] || exit 8; \
+    ./$$FILENAME || exit 14; )
+
+endif
+
 ifndef PATCH
 patch: $(DIR)/
 ifdef PATCH_FILE1
