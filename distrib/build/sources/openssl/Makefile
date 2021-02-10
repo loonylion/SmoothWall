@@ -6,19 +6,26 @@
 
 include ../Makefile.conf
 
-OPENSSL_VER = 1.0.2u
+OPENSSL_VER = 1.1.1b
 
 PACKAGE = openssl
 VERSION = $(OPENSSL_VER)
 
 #BASE_URL = http://www.openssl.org/source/
-BASE_URL = https://www.openssl.org/source/old/1.0.2
+BASE_URL = https://www.openssl.org/source/old/1.1.1
 
 # If building for 486, generate only 386 code. Otherwise, building
 #   'modern' code should be OK.
 ifeq ($(mARCH),i486)
 ONLY386 = 386
 endif
+
+PLATFORM = generic32
+ifeq ($(mARCH),x86_64)
+PLATFORM = x86_64
+endif
+
+
 
 OPENSSLDIR = $(PKG_DIR)/lib/ssl
 
@@ -34,9 +41,10 @@ configure: $(DIR)/
 \toptions="$$options $(CFLAGS)";;' $(DIR)/config
 	sed -i -e '/^  \*86-\*-linux2/,+11d' $(DIR)/config
 	sed -i -e 's/  FUBAR$$/  *86-*-linux2) OUT="linux-elf"/' $(DIR)/config
+	echo $(PWD)
+	echo $(mTUPLE)
 	@(cd $(DIR); \
-	  ./config no-ssl no-ssl-method shared --prefix=$(PKG_DIR) --libdir=lib --openssldir=/$(OPENSSLDIR) $(ONLY386); \
-	  patch < ../Makefile-MANDIR.patch);
+	  ./Configure linux-$(PLATFORM) -no-ssl2 -no-ssl3 -no-idea shared --prefix=$(PKG_DIR) --libdir=lib --openssldir=/$(OPENSSLDIR));
 
 compile: configure
 	@echo; echo; echo "compile"; echo
