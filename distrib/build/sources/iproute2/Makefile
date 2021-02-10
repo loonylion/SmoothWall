@@ -8,8 +8,8 @@ include ../Makefile.conf
 include ../Makefile.versions
 
 PACKAGE = iproute2
-VERSION = 4.9.0
-#VERSION = 4.15.0
+#VERSION = 4.14.0
+VERSION = 4.12.0
 
 BASE_URL = https://www.kernel.org/pub/linux/utils/net/$(PACKAGE)/
 
