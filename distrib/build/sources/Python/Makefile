@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = Python
-VERSION = 2.7.16
+VERSION = 3.7.9
 EXTENSION = .tar.xz
 
 BASE_URL = http://www.python.org/ftp/python/$(VERSION)
@@ -25,5 +25,6 @@ compile: configure
 	@find $(COMPILE_DIR) -type f -exec chmod o=r {} \;
 	@chmod -R o+rw $(COMPILE_DIR)
 	@make ${JOBS} -C $(COMPILE_DIR)
+	#ln -s $(COMPILE_DIR)/bin/python3 $(COMPILE_DIR)/bin/python
 
 include ../Makefile.rules

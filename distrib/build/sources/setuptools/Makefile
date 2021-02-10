@@ -29,7 +29,7 @@ BASE_URL = http://deb.debian.org/debian/pool/main/p/python-setuptools
 COMPILE = yes
 compile: patch
 	@echo; echo; echo "compile"; echo
-	cd $(DIR); python setup.py build
+	cd $(DIR); python3 setup.py build
 
 INSTALL = yes
 install: compile
@@ -38,6 +38,6 @@ install: compile
 	# invalid command name 'DESTDIR=/build/buildroot/setuptools'
 	#cd $(DIR); python setup.py DESTDIR=$(PKG_ROOT) install
 	# don't really need a tarball, just for M2Crypto setup
-	cd $(DIR); python setup.py install
+	cd $(DIR); python3 setup.py install
 
 include ../Makefile.rules

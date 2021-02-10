@@ -13,13 +13,13 @@ BASE_URL = https://files.pythonhosted.org/packages/74/18/3beedd4ac48b52d1a4d12f2
 COMPILE = yes
 compile: patch
 	@echo; echo; echo "compile"; echo
-	cd $(DIR); python setup.py build
+	cd $(DIR); python3 setup.py build
 
 INSTALL = yes
 install: compile
 	@echo; echo; echo "install"; echo
 	mkdir -vp $(PKG_ROOT)
 	#cd $(DIR); python setup.py DESTDIR=$(PKG_ROOT) install
-	cd $(DIR); python setup.py install
+	cd $(DIR); python3 setup.py install
 
 include ../Makefile.rules
