@@ -9,7 +9,8 @@ include ../Makefile.conf
 PACKAGE = popt
 VERSION = 1.16
 
-BASE_URL = http://rpm5.org/files/popt/
+#BASE_URL = http://rpm5.org/files/popt/ #files downloaded from here are corrupt
+BASE_URL = http://ftp.osuosl.org/pub/blfs/conglomeration/popt/
 
 PREPARE = yes
 $(DIR)/: download
