@@ -9,7 +9,7 @@
 include ../Makefile.conf
 
 PACKAGE = linux-firmware
-VERSION = 20200619
+VERSION = 20201118
 EXTENSION = .tar.gz
 BASE_URL =  https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot
 
