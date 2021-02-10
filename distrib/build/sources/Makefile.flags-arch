@@ -70,8 +70,9 @@ ifndef mARCH
   else ifeq ($(shell uname -m), aarch64)
     export mARCH = arm64
   else
-    export mARCH = $(shell uname -m | sed -e 's/i.86/$(ARCH32)/')
-#    export mTUPLE = $(mARCH)
+    #export mARCH = $(shell uname -m | sed -e 's/i.86/$(ARCH32)/')
+    export mARCH = x86_64
+   #export mTUPLE = $(mARCH)
   endif
 endif
 
@@ -113,7 +114,7 @@ else ifeq ($(mARCH),$(ARCH64))
   export mTUPLE = $(ARCH64)
   export SWE_TGT = $(mTUPLE)-tc-linux-gnu
   export FINAL_TGT = $(mTUPLE)-swe-linux-gnu
-  export CFLAGS = $(OPT_FLAGS) -m64 -fPIC
+  export CFLAGS = $(OPT_FLAGS) -m64 -fPIC -mindirect-branch=thunk -mfunction-return=thunk
   ifeq ($(CANx86_64), 0)
     export ARCHset = linux64
   endif

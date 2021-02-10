@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = coreutils
-VERSION = 8.28
+VERSION = 8.32
 
 BASE_URL = https://ftp.gnu.org/gnu/coreutils
 EXTENSION = .tar.xz
@@ -26,7 +26,7 @@ ifeq ($(BUILD_PHASE), Final)
 
 #CONFIG_OPTS += --enable-install-program=arch 
 
-PATCH_FILE1 = coreutils-$(VERSION)-i18n-1.patch
+PATCH_FILE1 = coreutils-8.32-i18n-1.patch
 PATCH_URL1 = http://www.linuxfromscratch.org/patches/downloads/coreutils/$(PATCH_FILE1)
 #PATCH_FILE2 = coreutils-8.26-uname-1.patch
 #PATCH_URL2 = http://www.linuxfromscratch.org/patches/downloads/coreutils/$(PATCH_FILE2)
