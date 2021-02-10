@@ -32,6 +32,7 @@ install: download
 	mkdir -vp $(PKG_ROOT)/lib/firmware
 	tar xf $(DOWNLOADS_DIR)/$(TARBALL)$(EXTENSION)
 	../../toolcrib/findfirmware | sort | uniq > needed-firmware.list
+	find . -name "*amd*" ! -name "*amdgpu*" | sed 's|./$(PACKAGE)-$(VERSION)/||' >> needed-firmware.list
 	set -x; cd $(PACKAGE)-$(VERSION); cat ../needed-firmware.list | while read fw; do \
 	  if [ -f "$$fw" ]; then \
 	    echo "$$fw" >> ../found-firmware.list; \
