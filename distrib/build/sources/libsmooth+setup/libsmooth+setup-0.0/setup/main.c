@@ -96,8 +96,8 @@ int main(int argc, char *argv[])
 		sections[5] = ctr[TR_DHCP_SERVER_CONFIGURATION],
 		sections[6] = ctr[TR_WEB_PROXY];
 		sections[7] = ctr[TR_DEFAULT_SECURITY_LEVEL];
-		sections[8] = ctr[TR_ISDN_CONFIGURATION];
-		sections[9] = ctr[TR_ADSL_CONFIGURATION];
+		//sections[8] = ctr[TR_ISDN_CONFIGURATION];
+		//sections[9] = ctr[TR_ADSL_CONFIGURATION];
 		sections[10] = ctr[TR_ROOT_PASSWORD];
 		sections[11] = ctr[TR_SETUP_PASSWORD];
 		sections[12] = ctr[TR_ADMIN_PASSWORD];
@@ -157,11 +157,11 @@ int main(int argc, char *argv[])
 					break;
 
 				case 8:
-					handleisdn();
+					//handleisdn();
 					break;
 
 				case 9:
-					handleadsl();
+					//handleadsl();
 					break;
 				
 				case 10:
@@ -218,8 +218,8 @@ int main(int argc, char *argv[])
 			for (;;)
 			{		
 				sections[0] = ctr[TR_WEB_PROXY];
-				sections[1] = ctr[TR_ISDN_CONFIGURATION];
-				sections[2] = ctr[TR_ADSL_CONFIGURATION];
+				//sections[1] = ctr[TR_ISDN_CONFIGURATION];
+				//sections[2] = ctr[TR_ADSL_CONFIGURATION];
 				sections[3] = ctr[TR_DHCP_SERVER_CONFIGURATION],
 				sections[4] = NULL;	
 	
@@ -237,11 +237,11 @@ int main(int argc, char *argv[])
 						break;
 						
 					case 1:
-						handleisdn();
+						//handleisdn();
 						break;
 	
 					case 2:
-						handleadsl();
+						//handleadsl();
 						break;
 											
 					case 3:
