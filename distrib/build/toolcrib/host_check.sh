@@ -351,7 +351,8 @@ else
   set `ldd /bin/bash | grep libc.so.6`
   GLIBC_FILE=$3
   if [[ ! -z "$GLIBC_FILE" && -f "$GLIBC_FILE" ]]; then
-    WORK=`$GLIBC_FILE --version 2>&1 | head -1 | sed -e 's/.* version \([0-9.][0-9.]*\),.*/\1/'`
+    #WORK=`$GLIBC_FILE --version 2>&1 | head -1 | sed -e 's/.* version \([0-9.][0-9.]*\),.*/\1/'`
+    WORK=`$GLIBC_FILE --version 2>&1 | head -1 | rev | cut -d " " -f1 | rev`
     OIFS=$IFS; IFS="."; set $WORK
     TGLIBC=`echo $*|awk '{printf("%2.2d%2.2d%2.2d\n", $1, $2, $3)}'`
     IFS=$OIFS
@@ -365,7 +366,7 @@ else
     fi
   else
     echo "  FAIL: libc.so.6 not found. Need glibc $VGLIBC<=version<=$VGLIBCM."
-    OK=OK+1
+    #OK=OK+1
   fi
 fi
 
