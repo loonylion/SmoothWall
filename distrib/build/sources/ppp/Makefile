@@ -7,11 +7,11 @@
 include ../Makefile.conf
 
 PACKAGE = ppp
-VERSION = 2.4.7
+VERSION = 2.4.9
 
 BASE_URL = http://samba.org/ftp/ppp/
 
-PATCH_FILE1 = pppstats-Makefile.patch
+PATCH_FILE1 = pppstats-2.4.9-Makefile.patch
 
 COMPILE = yes
 INSTALL = yes
@@ -29,6 +29,7 @@ compile: configure
 	  sed -i -e 's/^\(CFLAGS\s*=.*\)/\1 $(CFLAGS)/' pppd/plugins/radius/Makefile; \
 	  sed -i -e 's/^\(CFLAGS.*\)/export \1 $(CFLAGS)/' pppstats/Makefile; \
 	  sed -i -e 's/^\(CFLAGS.*\)/export \1 $(CFLAGS)/' pppdump/Makefile
+	  #sudo cp -f pppstats.c.new $(DIR)/pppstats/pppstats.c
 	@make $(JOBS) -C $(DIR) COMPILE_FLAGS="$(COMPILE_FLAGS)"
 
 install: compile

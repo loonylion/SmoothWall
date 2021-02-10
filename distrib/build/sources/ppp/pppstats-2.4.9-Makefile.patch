@@ -1,0 +1,21 @@
+--- ppp-2.4.9/pppstats/Makefile.linux
++++ ppp-2.4.9/pppstats/Makefile.linux
+@@ -2,7 +2,7 @@
+ # pppstats makefile
+ #
+ CROSS_COMPILE=@CROSS_COMPILE@
+-CC=$(CROSS_COMPILE)@CC@
++CC=gcc
+ COPTS=@CFLAGS@
+ 
+ DESTDIR = $(INSTROOT)@DESTDIR@
+@@ -27,7 +27,7 @@
+ 	$(INSTALL) -c -m 444 pppstats.8 $(MANDIR)
+ 
+ pppstats: $(PPPSTATSRCS)
+-	$(CC) $(CFLAGS) $(LDFLAGS) -o pppstats pppstats.c $(LIBS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -O -I../include -o pppstats pppstats.c $(LIBS)
+ 
+ clean:
+ 	rm -f pppstats *~ #* core
+
