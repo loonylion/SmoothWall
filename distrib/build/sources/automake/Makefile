@@ -7,8 +7,17 @@
 include ../Makefile.conf
 
 PACKAGE = automake
-VERSION = 1.15.1
+VERSION = 1.16.1
 
 BASE_URL = https://ftp.gnu.org/gnu/automake
+
+# Tool Chain Build Stage_3
+#
+ifeq ($(BUILD_PHASE), Stage_3)
+CONFIG_OPTS += --enable-install-program=hostname
+endif # Stage 3
+
+# # Final Build
+#
 
 include ../Makefile.rules

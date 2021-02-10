@@ -7,9 +7,10 @@
 include ../Makefile.conf
 
 PACKAGE = libevent
-VERSION = 2.0.22
+VERSION = 2.1.10
 
-BASE_URL = http://downloads.sourceforge.net/levent/
+#BASE_URL = http://downloads.sourceforge.net/levent/
+BASE_URL = https://github.com/libevent/libevent/releases/download/release-$(VERSION)/
 TARBALL = $(PACKAGE)-$(VERSION)-stable
 DIR = $(TARBALL)
 
