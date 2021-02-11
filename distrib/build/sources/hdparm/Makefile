@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = hdparm
-VERSION = 9.33
+VERSION = 9.60
 
 BASE_URL = http://sourceforge.net/projects/hdparm/files/hdparm/
 
