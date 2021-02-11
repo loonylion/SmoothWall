@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = dhcp
-VERSION = 4.1-ESV-R13
+VERSION = 4.1-ESV-R16
 
 #BASE_URL = http://isc.mirrors.pair.com/dhcp/$(VERSION)
 BASE_URL = ftp://ftp.isc.org/isc/dhcp/$(VERSION)/$(VERSION).tar.gz
