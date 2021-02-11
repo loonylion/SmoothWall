@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = suricata
-VERSION = 4.1.7
+VERSION = 4.1.10
 
 DIR = $(PACKAGE)-$(VERSION)
 
