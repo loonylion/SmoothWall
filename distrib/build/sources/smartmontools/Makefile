@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = smartmontools
-VERSION = 6.3
+VERSION = 7.1
 
 BASE_URL = http://sourceforge.net/projects/$(PACKAGE)/files/$(PACKAGE)/$(VERSION)
 
