@@ -1,7 +1,7 @@
 include ../Makefile.conf
 
 PACKAGE = clamav
-VERSION = 0.102.3
+VERSION = 0.103.0
 
 BASE_URL = https://www.clamav.net/downloads/production
 
@@ -11,7 +11,7 @@ BASE_URL = https://www.clamav.net/downloads/production
 PRE_CONFIGURE = LIBS=-ltinfo
 CONFIG_OPTS += --sysconfdir=/usr/lib/smoothwall --with-dbdir=/var/clamav --disable-clamav --disable-ltdl-install --without-included-ltdl
 
-PATCH_FILE1 = clamav-pidperms.patch
+#PATCH_FILE1 = clamav-pidperms.patch
 
 INSTALL = yes
 
