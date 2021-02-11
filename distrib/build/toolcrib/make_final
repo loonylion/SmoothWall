@@ -109,7 +109,6 @@ fi
       build gmp
       build mpfr
       build mpc
-      build zlib
       build gcc
       other_cmd "crumbs/$BUILD_PHASE.toolchain.verified" \
                 "final toolchain verification" \
@@ -212,6 +211,7 @@ fi
       build dialog
       build newt
       build gd
+      ln -s buildroot/python/usr/bin/python3 buildroot/python/usr/bin/python
       touch crumbs/Final.grp2.compiled
     fi
 
@@ -246,6 +246,16 @@ fi
       build acpica
       JOBS=$JOBS_MP
       build nasm
+      build rrdtool
+
+      # As more of the internet changes to SSL, openssl, perl-mods and
+      #   cacert_bundle will have to be built sooner.
+
+      # cacert-bundle depends on openssl and on perl-mods which depends
+      #   on rrdtool.
+      build perl-mods
+      build cacert-bundle
+      
       touch crumbs/Final.grp3.compiled
     fi
 
@@ -268,13 +278,17 @@ fi
       build linux
       #build linux-backports
       build linux-firmware
-  #    build kernel-drivers
+  #   build kernel-drivers
+      #build libtirpc		#|
+      #build rpcsvc-proto	#| enable these for glibc > 2.25
+      #build libnsl			#|
       build iptables
       build ipset
       build xtables-addons
       build ipbatch
-     build klibc
+      build klibc
       build linux-atm
+
       touch crumbs/Final.grp4.compiled
     fi
 
@@ -283,6 +297,7 @@ fi
     else
       echo
       echo -e "  Final group 5 packages (core)"
+      build cpufrequtils
       build usbutils
       build pciutils
       build hdparm
@@ -292,18 +307,10 @@ fi
       build tcpdump
       build dosfstools
 
-      build rrdtool
-
-      # As more of the internet changes to SSL, openssl, perl-mods and
-      #   cacert_bundle will have to be built sooner.
-
-      # cacert-bundle depends on openssl and on perl-mods which depends
-      #   on rrdtool.
-      build perl-mods
-      build cacert-bundle
-
       # daq (and snort) version check depend on cacert-bundle
+      JOBS=$JOBS_UP # daq sometimes fails to build in mp because compiles get out of sequence
       build daq
+      JOBS=$JOBS_MP
       build httpd
       build cron
       JOBS=$JOBS_UP
@@ -329,9 +336,8 @@ fi
       build openntpd
 
       build squid
-
       build ppp
-      build isdn4k-utils
+      #build isdn4k-utils
       build rp-pppoe
       build ibod
       build dhcpcd
@@ -352,8 +358,9 @@ fi
       build cdrtools
     fi
       build busybox
-
+	  build htop
       build dhcp
+      build nghttp2
       build snort
       build oinkmaster
       build swig
@@ -363,11 +370,11 @@ fi
 
       build wireless_tools
       build setuptools
-      build M2Crypto
+      #build M2Crypto
       
       build libgpg-error
       build libgcrypt
-      build crda
+      #build crda
       build wpa_supplicant
       
       build hostapd
@@ -400,6 +407,8 @@ fi
       build cpio
    if [ "$mTUPLE" == "$mARCH" ]; then
       build grub
+      build rng-tools
+      build haveged
    elif [ "$mTUPLE" == "pi0w" ] || [ "$mTUPLE" == "rpi2" ] \
 			|| [ "$mTUPLE" == "rpi3" ] || [ "$mTUPLE" == "pi3-64" ] \
 			|| [ "$mTUPLE" == "rpi4" ] || [ "$mTUPLE" == "pi4-64" ]; then
@@ -410,26 +419,26 @@ fi
       build cmake
       build rpi-userland
       build i2c-tools
-    #  build wiringPi
+      build wiringPi
       build rng-tools
       #echo "done"; exit 1
    elif [ "$mTUPLE" == "xu4" ]; then
-      build swig
+      #build swig
       build dtc
       build u-boot
  #     build odroid-firmware
  #     build bash-completion
  #     build mkinitcpio
    fi
-      build reiserfsprogs
+       build reiserfsprogs
       build parted
-      build pcmciautils
+      #build pcmciautils
       build yaml
       build suricata
       build smartmontools
       build squidguard
-      build subversion
-      build qemu
+      #build subversion
+      #build qemu
       #build ntop
       build iperf
       build fping
@@ -443,6 +452,8 @@ fi
       build pv
       build FFC
       build GAR
+      #build infnoise-trng
+      build ookla-speedtest
 
       touch crumbs/Final.grp6.compiled
     fi
