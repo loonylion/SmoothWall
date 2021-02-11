@@ -1,7 +1,7 @@
 include ../Makefile.conf
 
 PACKAGE = siproxd
-VERSION = 0.8.2
+VERSION = 0.8.3
 
 BASE_URL = http://downloads.sourceforge.net/project/$(PACKAGE)/$(PACKAGE)/$(VERSION)/
 
