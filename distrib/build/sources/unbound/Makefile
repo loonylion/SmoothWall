@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = unbound
-VERSION = 1.9.4
+VERSION = 1.13.0
 
 BASE_URL = http://www.unbound.net/downloads
 
