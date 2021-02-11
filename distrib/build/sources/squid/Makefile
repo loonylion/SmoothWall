@@ -8,7 +8,7 @@ include ../Makefile.conf
 include ../Makefile.versions
 
 PACKAGE = squid
-VERSION = 4.9
+VERSION = 4.12
 
 BASE_URL = http://www.squid-cache.org/Versions/v4
 
