@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [-e /var/smoothwall/ssdtrim/supported]
+
+	if [-e /var/smoothwall/ssdtrim/enabled]
+		(
+		echo "$(date -R)"
+		fstrim -av
+		echo ""
+		) >> /var/log/ssdtrim.log
+	
+	else  
+		exit
+	fi
+
+if [-e /var/smoothwall/ssdtrim/forced]
+	(
+		echo "$(date -R)"
+		fstrim -av
+		echo ""
+		) >> /var/log/ssdtrim.log
+	
+fi

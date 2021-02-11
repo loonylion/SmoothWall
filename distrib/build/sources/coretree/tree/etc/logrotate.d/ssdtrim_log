@@ -1,0 +1,6 @@
+/var/log/ssdtrim.log {
+    notifempty
+    missingok
+    compress
+}
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+/sbin/modprobe cpufreq_ondemand
+/sbin/modprobe cpufreq_userspace
+/sbin/modprobe cpufreq_conservative
+/sbin/modprobe cpufreq_powersave
+/sbin/modprobe cpufreq_performance
+/sbin/modprobe cpufreq_stats

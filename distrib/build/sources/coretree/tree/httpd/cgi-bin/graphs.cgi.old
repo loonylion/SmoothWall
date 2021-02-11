@@ -20,7 +20,6 @@ my (%cgiparams, %netsettings, @graphs, $boxtitle);
 my $name = '';
 my $title = '';
 my $errormessage = '';
-my $stats_sort = '';
 
 my $METAs = q[
 <meta http-equiv="Refresh" content="300"><meta http-equiv="Cache-Control" content="no-cache">
@@ -47,7 +46,6 @@ my @values = split(/&/, $ENV{'QUERY_STRING'}) if ($ENV{'QUERY_STRING'});
 foreach my $i (@values) {
 	my ($varname, $mydata) = split(/=/, $i);
 	$name = $mydata if ($varname eq 'i');
-	$stats_sort = $mydata if ($varname eq 'stats_sort');
 }
 
 # check if viewing one interface only 
@@ -145,7 +143,6 @@ foreach my $stat (keys %stats) {
 		my $addr = $1 . $';
 		my $field = $`;
 		my $value = $stats{$stat};
-		my $orig_value = $value;
 		my $units;
 		if ($field =~ /^cur/) {
 			$units = "bit/s";
@@ -180,13 +177,12 @@ foreach my $stat (keys %stats) {
 		$value = sprintf("%0.1f", $value);
 		$addrstats{$addr} = {} unless defined $addrstats{$addr};
 		$addrstats{$addr}->{$field} = "$value $units";
-		$addrstats{$addr}->{$field."_value"} = $orig_value * 1;
 	}
 }
 
 foreach my $addr (keys %addrstats) {
-	if ($addrstats{$addr}->{'this_month_inc_total'}) {
-		my ($value, $units) = split(/ /, $addrstats{$addr}->{'this_month_inc_total'});
+	if ($addrstats{$addr}->{'this_day_inc_total'}) {
+		my ($value, $units) = split(/ /, $addrstats{$addr}->{'this_day_inc_total'});
 		if ($value > 0) {
 			my $pretty = $addr;
 
@@ -286,97 +282,24 @@ print "</table></div>";
 
 &openbox("Address traffic statistics - ${timestamp}:");
 
-#
-## Convert a dotted quad c.d.e.f to a single unsigned 32bit number.
-##
-
-sub ipto32bit {
-	my ($ip, $c, $d, $e, $f);
-
-	$ip = shift;
-	($c,$d,$e,$f) = split(/\./,$ip);
-
-	return ($c << 24) + ($d << 16) + ($e << 8) + $f;
-}
-
-sub SortByIPAddressDesc { return ipto32bit($a->{'Address'}) <=> ipto32bit($b->{'Address'}) }
-sub SortByIPAddressAsc { return ipto32bit($b->{'Address'}) <=> ipto32bit($a->{'Address'}) }
-sub SortByHourDesc { $b->{'this_hour_inc_total_value'} <=> $a->{'this_hour_inc_total_value'} }
-sub SortByHourAsc { $a->{'this_hour_inc_total_value'} <=> $b->{'this_hour_inc_total_value'} } 
-sub SortByDayDesc { $b->{'this_day_inc_total_value'} <=> $a->{'this_day_inc_total_value'} }
-sub SortByDayAsc { $a->{'this_day_inc_total_value'} <=> $b->{'this_day_inc_total_value'} } 
-sub SortByWeekDesc { $b->{'this_week_inc_total_value'} <=> $a->{'this_week_inc_total_value'} }
-sub SortByWeekAsc { $a->{'this_week_inc_total_value'} <=> $b->{'this_week_inc_total_value'} }
-sub SortByMonthDesc { $b->{'this_month_inc_total_value'} <=> $a->{'this_month_inc_total_value'} }
-sub SortByMonthAsc { $a->{'this_month_inc_total_value'} <=> $b->{'this_month_inc_total_value'} }
-
-my $ip_address_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=ip_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-my $hour_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=hour_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-my $day_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=day_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-my $week_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=week_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-my $month_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=month_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-my $sort_func = \&SortByIPAddressDesc;
-
-if ($stats_sort eq "ip_desc")
-{
-	$ip_address_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=ip_asc"><img src=\'/ui/img/up.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByIPAddressDesc;
-} elsif ($stats_sort eq "ip_asc")
-{
-	$ip_address_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=ip_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByIPAddressAsc;
-} elsif ($stats_sort eq "hour_desc")
-{
-	$hour_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=hour_asc"><img src=\'/ui/img/up.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByHourDesc;
-} elsif ($stats_sort eq "hour_asc")
-{
-	$hour_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=hour_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByHourAsc;
-} elsif ($stats_sort eq "day_desc")
-{
-	$day_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=day_asc"><img src=\'/ui/img/up.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByDayDesc;
-} elsif ($stats_sort eq "day_asc")
-{
-	$day_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=day_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByDayAsc;
-} elsif ($stats_sort eq "week_desc")
-{
-	$week_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=week_asc"><img src=\'/ui/img/up.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByWeekDesc;
-} elsif ($stats_sort eq "week_asc")
-{
-	$week_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=week_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByWeekAsc;
-} elsif ($stats_sort eq "month_desc")
-{
-	$month_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=month_asc"><img src=\'/ui/img/up.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByMonthDesc;
-} elsif ($stats_sort eq "month_asc")
-{
-	$month_twistie = '<a href="/cgi-bin/graphs.cgi?stats_sort=month_desc"><img src=\'/ui/img/down.jpg\' alt=\'change direction\'></a>';
-	$sort_func = \&SortByMonthAsc;
-} 
-
 print <<END
 <div style="margin:1.5em auto; width:95%; max-height:600px; overflow:auto">
 <table class='list'>
 <tr>
-	<th class='list'  style='width: 15%;'>Address $ip_address_twistie</th>
+	<th class='list'  style='width: 15%;'>Address</th>
 	<th class='list'  style='width: 9%;'>$tr{'traffic stats period'}</th>
 	<th class='list'  style='width: 11%;'>$tr{'traffic stats direction'}</th>
 	<th class='list'  style='width: 15%;'>$tr{'traffic stats current rate'}</th>
-	<th class='list'  style='width: 12%;'>$tr{'traffic stats hour'} $hour_twistie</th>
-	<th class='list'  style='width: 12%;'>$tr{'traffic stats day'} $day_twistie</th>
-	<th class='list'  style='width: 12%;'>$tr{'traffic stats week'} $week_twistie</th>
-	<th class='list'  style='width: 12%;'>$tr{'traffic stats month'} $month_twistie</th>
+	<th class='list'  style='width: 12%;'>$tr{'traffic stats hour'}</th>
+	<th class='list'  style='width: 12%;'>$tr{'traffic stats day'}</th>
+	<th class='list'  style='width: 12%;'>$tr{'traffic stats week'}</th>
+	<th class='list'  style='width: 12%;'>$tr{'traffic stats month'}</th>
 </tr>
 END
 ;
 
 $rowCount = -1;
-foreach my $row ( sort { $sort_func->($b , $a) } @addr_details ) {
+foreach my $row ( sort { $a->{'Address'} cmp $b->{'Address'} } @addr_details ) {
 	$rowCount++;
 	print <<END
 <tr style="background-color:$colours[$rowCount%2]">

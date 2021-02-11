@@ -1,0 +1,14 @@
+#!/bin/bash
+
+mapfile -t prefs < "/var/smoothwall/cpufreq-utils/preferences/stored"
+if [ "${prefs}" == ""]
+then
+	exit
+fi
+if [ "${prefs[0]}" == 'userspace' ]
+then
+	cpufreq-set -g userspace 
+	cpufreq-set -f "${prefs[1]}"
+else
+	cpufreq-set -g "${prefs[0]}" -d "${prefs[1]}" -u "${prefs[2]}"
+fi

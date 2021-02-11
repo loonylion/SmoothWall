@@ -1592,4 +1592,18 @@
 'invalid purple PURPLE_SSID' => 'PURPLE_SSID is invalid',
 'invalid purple PURPLE_WPA_PASSPHRASE' => 'PURPLE_WPA_PASSPHRASE is invalid',
 
+#pgraphs
+'sspgraphs' => 'performance graphs',
+'performance graphs' => 'Performance graphs',
+'performance graphsc' => 'Performance graphs:'
+
+#cpufrequtils
+'sscpufreq' => 'CPU Frequency Scaling',
+'CPUFreq-utils' => 'CPUFreq-Utils ',
+'CPUFreqc' => 'CPUFreq-utils mod:',
+
+#ssd
+'sstrim' => 'SSD FS Trim',
+'SSDTrim' => 'SSD FS Trim',
+'ssdtrim' => 'SSD Trim',
 );

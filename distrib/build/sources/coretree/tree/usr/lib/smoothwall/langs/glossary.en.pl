@@ -57,7 +57,11 @@
 	'Isochronous' => "Things that happen at regular intervals, such as the packets of an active VoIP channel.",
 	'UPS' => 'Uninterruptable Power Supply.',
 	'Wi-Fi' => 'Wi-Fi Settings',
-
+	'unlikelystringxx' => "This should never appear",
+	'SMART' => "Self-Monitoring, Analysis and Reporting Technology",
+	'S.M.A.R.T.' => "Self-Monitoring, Analysis and Reporting Technology",
+	'SSD' => "Solid State Drive. This is a storage device that makes use of non-volatile semiconductor chips (flash memory) in place of a magnetised rotating platter",
+	'Trim' => "A functionality designed to prolong the lifespan of SSD devices by evening out the use of the individual flash cells.",
 );
 
 1;

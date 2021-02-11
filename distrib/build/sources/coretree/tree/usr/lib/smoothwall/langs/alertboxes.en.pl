@@ -64,6 +64,9 @@ firewall.  Further information on your Smoothwall Express is available from <a h
 'urlfilter.dat'		=> 'Check logs for attempted access from clients to domains and URLs that have been blocked by the URL filter.',
 'apcupsd.cgi'           => 'Configure the interaction between Smoothwall Express and the UPS that powers it. Configure notifications.<br />Allow slave systems to connect to the daemon to monitor the UPS.',
 'wifi.cgi'		=> 'Shows information about your Smoothwall Express system Wi-Fi.',
-
+'pgraphs.cgi' => 'Graphs showing system performance information.',
+'cpufreq.cgi' => 'Configuration of CPU Frequency Scaling',	
+'ssd.cgi' => 'Configuration of FSTrim on supported Solid State Drives',
+);
 );
 

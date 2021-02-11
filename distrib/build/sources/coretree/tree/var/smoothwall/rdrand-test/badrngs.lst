@@ -1,0 +1,10 @@
+# SWE 3.2 badrngs.list
+#
+# list of cpuids with known flawed/faulty/non-functional/unsafe RDRAND implementation. This file is used by hwrngdetect.pl
+#
+# format is vendor_id:cpu family:model:stepping as provided by /proc/cpuinfo
+# e.g: AuthenticAMD:23:8:2
+# one cpuid per line
+# lines starting with # are ignored
+#
+# copyright 2021 Peter Schofield
