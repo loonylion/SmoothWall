@@ -1,7 +1,7 @@
 include ../Makefile.conf
 
 PACKAGE = squidclamav
-VERSION = 6.16
+VERSION = 7.1
 
 BASE_URL = https://sourceforge.net/projects/squidclamav/files/squidclamav/$(VERSION)
 
