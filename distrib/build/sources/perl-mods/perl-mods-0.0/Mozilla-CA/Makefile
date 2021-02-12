@@ -7,7 +7,7 @@
 include ../../../Makefile.conf
 
 PACKAGE = Mozilla-CA
-VERSION = 20180117
+VERSION = 20200520
 
 BASE_URL = https://cpan.metacpan.org/authors/id/A/AB/ABH
 
