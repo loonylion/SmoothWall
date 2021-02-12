@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = curl
-VERSION = 7.68.0
+VERSION = 7.74.0
 
 BASE_URL = https://curl.haxx.se/download
 EXTENSION = .tar.xz
