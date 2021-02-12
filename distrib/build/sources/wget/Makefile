@@ -7,7 +7,7 @@
 include ../Makefile.conf
 
 PACKAGE = wget
-VERSION = 1.19.2
+VERSION = 1.20.2
 
 BASE_URL = https://ftp.gnu.org/gnu/wget
 EXTENSION = .tar.gz
