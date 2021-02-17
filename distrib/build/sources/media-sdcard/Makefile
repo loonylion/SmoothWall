@@ -4,7 +4,7 @@
 # (c) ShorTie 2016
 #
 # This code is distributed under the terms of the GPL v2.
-
+#exit 0;
 include ../Makefile.conf
 include ../Makefile.versions
 include ../Makefile
@@ -30,18 +30,18 @@ TOOLCHAIN_PKGS = expect
 
 # eudev is used now
 OTHER_PKGS = updates jam udev udev-config cnxadsl \
-	     libart_lgpl procps procinfo dev86 openswan eciadsl-synch_bin eciadsl-usermode
+	     libart_lgpl procps procinfo dev86 openswan eciadsl-synch_bin eciadsl-usermode isdn4k-utils crda M2Crypto pcmciautils qemu subversion
 
 TARGET_DIR = /build/target
 
 ADV_PKGS = gdbm GeoIP Python libmnl openldap gperf attr \
-	   subversion iperf
+	   iperf
 # ntop
 KVM_PKGS = samba
 
 # use this to include mTUPLE specifics
 ifeq ($(mTUPLE),$(filter $(mTUPLE),i586 i686 x86_64))
-  export GRUB = grub kernel-drivers
+  export GRUB = grub #kernel-drivers
   #export GRUB = grub2 kernel-drivers cdrtools libelf
 else ifeq ($(mTUPLE),$(filter $(mTUPLE),pi0w rpi2 rpi3 pi3-64 rpi4 pi4-64))
   export GRUB = fake-hwclock rpi-firmware i2c-tools rng-tools
@@ -67,16 +67,16 @@ INST_PKGS = glibc libsmooth+setup libgcc freetype libpng libdnet \
 	    linux openssl openssh httpd smoothd squid squidclamav freefont \
 	    strace rrdtool cron tcpdump dnsmasq ntp openntpd hdparm hddtemp \
 	    iproute2 gd expat ethtool listtables inotify-tools \
-	    beep2 pcre trafficstats iftop setuids ppp isdn4k-utils rp-pppoe \
-	    ibod dhcpcd dhcp snort \
+	    beep2 pcre trafficstats iftop setuids ppp rp-pppoe infnoise-trng\
+	    ibod dhcpcd dhcp snort rng-tools haveged ookla-speedtest\
 	    oinkmaster libreswan wireless_tools wpa_supplicant imspector diffutils clamav \
 	    p3scan siproxd which miniupnpd ez-ipupdate noip \
 	    smartmontools at dosfstools linux-atm \
 	    mtools nano reiserfsprogs parted xtables-addons cpio dialog \
-	    eudev lm_sensors xz pcmciautils qemu sysfsutils db squidGuard \
+	    eudev lm_sensors xz sysfsutils db squidGuard \
 	    apcupsd cacert-bundle setkerneltz fping \
 	    linux-firmware acl libelf bridge-utils $(RPI_PKGS) \
-	    iw libgcrypt libgpg-error crda hostapd M2Crypto wireless-regdb \
+	    iw libgcrypt libgpg-error hostapd wireless-regdb \
 	    coretree $(GRUB) $(ADV_PKGS) device-ids FFC GAR git
 
 #	    kernel-drivers \
@@ -97,7 +97,7 @@ DEV_PKGS = kernel-headers patch make autoconf automake bison dejagnu gcc \
 	   pkg-config sudo texinfo busybox \
 	   libtool nasm acpica zip
 
-NOT_DRIVERS = drivers/video
+NOT_DRIVERS = drivers/video drivers/gpu
 
 cdrom:
 	@echo -e "\n\ncdrom"
@@ -186,8 +186,8 @@ endif
 	if [ -d distrib/usr/include ]; then \
 	  mkdir -p distrib-dev/usr/include; \
 	  cp -a distrib/usr/include distrib-dev/usr/; \
-	  rm -rf distrib/usr/include/*; \
-	  mv distrib-dev/usr/include/python2.7 distrib/usr/include; fi
+	  rm -rf distrib/usr/include/*; fi #\
+	  #mv distrib-dev/usr/include/python2.7 distrib/usr/include; fi
 	
 	@echo "        move static libs to distrib-dev" >>$(MEDIA_BUILD_OUT)
 	@echo -e "\n\nMoving static libs to distrib-dev:"

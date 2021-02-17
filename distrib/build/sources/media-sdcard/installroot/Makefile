@@ -22,10 +22,11 @@ NOT_DRIVERS = drivers/gpu drivers/parport drivers/scsi/fcoe \
 	      drivers/scsi/fnic drivers/scsi/osd drivers/scsi/libfc \
 	      drivers/scsi/cxgbi drivers/scsi/be2iscsi drivers/scsi/bfa \
 	      drivers/scsi/lpfc drivers/hwmon drivers/media \
-	      drivers/watchdog drivers/edac drivers/cpufreq drivers/regulator \
+	      drivers/watchdog drivers/edac drivers/regulator \
 	      drivers/video net/netfilter net/ipsec \
 	      net/sched net/bridge net/sctp \
-	      net/ax25 net/wimax net/cfrm
+	      net/ax25 net/wimax net/cfrm drivers/accessibility drivers/android drivers/auxdisplay drivers/fpga drivers/gnss drivers/nfc drivers/pcmcia drivers/atm drivers/infiniband drivers/scsi/pcmcia drivers/macintosh drivers/staging/android drivers/staging/media drivers/staging/xgifb drivers/input/joystick drivers/input/tablet drivers/input/touchscreen drivers/input/mouse drivers/input/gameport net/appletalk net/batman-adv net/bpfilter net/6lowpan net/decnet net/nfc net/x25 net/9p net/dccp net/rose net/l2tp net/mpls net/rdsnet/sctp net/dsa drivers/isdn drivers/net/hamradio drivers/net/wimax
+
 NOT_SHARE = locales/[a-d]* locales/e[o-z]* locales/[e-z]* doc info man readline
 #NOT_USR = include info man
 NOT_USR = info man
@@ -139,11 +140,14 @@ endif
 
 # Clean extra stuff to shrink the initramfs
 	@echo "        Clean to shrink the initramfs" >>$(MEDIA_BUILD_OUT)
+	#@echo `ls -R tmp/lib/modules` >>$(MEDIA_BUILD_OUT)
 	@echo; echo; echo "Clean extra stuff to shrink the initramfs"
 	for i in tmp/lib/modules/*; do (cd "$$i/kernel"; rm -rf $(NOT_DRIVERS)); done
 	cd tmp/usr/share; rm -rf $(NOT_SHARE)
 	cd tmp/usr; rm -rf $(NOT_USR)
 	cd tmp; find . -name lib\*a -exec rm {} \;
+	#@echo `ls -R tmp/lib/modules` >>$(MEDIA_BUILD_OUT)
+	
 
 # Build the installer initramfs CPIO archive
 	@echo "        Build the installer initramfs CPIO archive" >>$(MEDIA_BUILD_OUT)
