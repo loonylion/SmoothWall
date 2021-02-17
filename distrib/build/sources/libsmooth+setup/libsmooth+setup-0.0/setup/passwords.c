@@ -70,8 +70,10 @@ int handleadminpassword(void)
 	if (getpassword(password, ctr[TR_ENTER_ADMIN_PASSWORD]) == 2)
 		return 0;
 	
-	snprintf(commandstring, STRING_SIZE,
-		"/usr/sbin/htpasswd -m -c -b " CONFIG_ROOT "auth/users admin '%s'", password);
+	/*snprintf(commandstring, STRING_SIZE,
+		"/usr/sbin/htpasswd -m -c -b " CONFIG_ROOT "auth/users admin '%s'", password);*/
+		snprintf(commandstring, STRING_SIZE,
+		"/usr/bin/htpasswd -m -c -b " CONFIG_ROOT "auth/users admin '%s'", password);
 	if (runcommandwithstatusnolog(commandstring, ctr[TR_SETTING_ADMIN_PASSWORD]))
 	{
 		errorbox(ctr[TR_PROBLEM_SETTING_ADMIN_PASSWORD]);
