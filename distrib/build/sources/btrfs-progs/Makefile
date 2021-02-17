@@ -8,7 +8,8 @@
 include ../Makefile.conf
 
 PACKAGE = btrfs-progs
-VERSION = v4.15.1
+#VERSION = v4.15.1
+VERSION = v5.6.1
 EXTENSION = .tar.xz
 
 BASE_URL = https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs
