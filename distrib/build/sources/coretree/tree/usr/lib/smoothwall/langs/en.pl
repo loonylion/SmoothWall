@@ -1595,7 +1595,7 @@
 #pgraphs
 'sspgraphs' => 'performance graphs',
 'performance graphs' => 'Performance graphs',
-'performance graphsc' => 'Performance graphs:'
+'performance graphsc' => 'Performance graphs:',
 
 #cpufrequtils
 'sscpufreq' => 'CPU Frequency Scaling',
@@ -1606,4 +1606,19 @@
 'sstrim' => 'SSD FS Trim',
 'SSDTrim' => 'SSD FS Trim',
 'ssdtrim' => 'SSD Trim',
+
+#whatmask
+'sswhatmask' => 'whatmask',
+'invalid ip' => 'Invalid SUBNET or CIDR format.',
+'whatmask-ip' => 'IP/SUBNET or IP/CIDR',
+'whatmask-Go to the SW Forums' => 'Go to the SW forums',
+'whatmask-Mod thread' => 'mod thread',
+
+#credits
+'sscredits' => 'SWE 3.2 Credits',
+
+#speedtest
+'ssspeedtest' => 'WAN Speedtest',
+'Speedtest' => 'WAN Speedtest',
+'Speedtestc' => 'WAN Speedtest',
 );

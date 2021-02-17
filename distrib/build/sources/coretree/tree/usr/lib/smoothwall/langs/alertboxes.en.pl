@@ -67,6 +67,8 @@ firewall.  Further information on your Smoothwall Express is available from <a h
 'pgraphs.cgi' => 'Graphs showing system performance information.',
 'cpufreq.cgi' => 'Configuration of CPU Frequency Scaling',	
 'ssd.cgi' => 'Configuration of FSTrim on supported Solid State Drives',
-);
+'whatmask.cgi'	=> 'Subnet mask/CIDR Conversion Utility',
+'credits.cgi'	=> 'SWE 3.2 developer credits',
+'speedtest.cgi' => 'WAN Speedtest and results',
 );
 
