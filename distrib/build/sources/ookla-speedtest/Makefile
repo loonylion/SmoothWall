@@ -33,5 +33,9 @@ install:
 	echo $(PWD)
 	mkdir -p $(PKG_ROOT)/usr/bin
 	mv $(PKG_ROOT)/speedtest $(PKG_ROOT)/usr/bin
+	mkdir -p $(PKG_ROOT)/usr/share/man/man5
+	mv $(PKG_ROOT)/speedtest.5 $(PKG_ROOT)/usr/share/man/man5
+	mkdir -p $(PKG_ROOT)/usr/share/doc
+	mv $(PKG_ROOT)/speedtest.md $(PKG_ROOT)/usr/share/doc
 	
 include ../Makefile.rules
