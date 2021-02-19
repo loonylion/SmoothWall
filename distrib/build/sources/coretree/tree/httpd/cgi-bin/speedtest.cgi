@@ -33,7 +33,7 @@ $cgiparams{'ACTION'} = " " ;
 
 if (!exists("/tmp/speedtest"))
 {
-	`speedtest -f csv >/tmp/speedtest`;
+	my $result = exec("speedtest --accept-license --accept-gdpr --ca-certificate=/usr/lib/ssl/certs/ca-certificates.crt -f csv >/tmp/speedtest");
 	&showhttpheaders();
 	&openpage($tr{'Speedtest'}."$title", 1, '<META REFRESH="20" <META HTTP-EQUIV="Cache-Control" content="no-cache"> <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> ', 'about your smoothie');
 
@@ -69,7 +69,7 @@ my @results = split(',',`cat /tmp/speedtest`);
 print "<p>Speedtest server: ",@results[1],"</p><br/>";
 print "<table><tr><th rowspan=\"2\">Latency (ms)</th><th rowspan=\"2\">Jitter (ms)</th><th rowspan=\"2\">Packet Loss</th><th colspan=\"2\">Download</th><th colspan=\"2\">Upload</th></tr>
 <tr><th>Speed</th><th>Bytes</th><th>Speed</th><th>Bytes</th></tr>";
-print "<tr><td>",@results[2],"</td><td>",@results[3],"</td><td>",@results[4]," </td><td>",friendly_numbers(@results[5]),"bps</td><td>",friendly_numbers(@results[6]),"bytes</td><td>",friendly_numbers(@results[7]),"bps</td><td>",friendly_numbers(@results[8]),"bytes</td></tr></table></div>";
+print "<tr><td>",@results[2],"</td><td>",@results[3],"</td><td>",@results[4]," </td><td>",friendly_numbers(@results[5]),"bytes/sec</td><td>",friendly_numbers(@results[7]),"bytes</td><td>",friendly_numbers(@results[6]),"bytes/sec</td><td>",friendly_numbers(@results[8]),"bytes</td></tr></table></div>";
   &closebox();
 
 # &openbox('');
@@ -90,30 +90,30 @@ print "<tr><td>",@results[2],"</td><td>",@results[3],"</td><td>",@results[4]," <
 
 sub friendly_numbers
 {
-	my $friendly = (0+$_[0])/1000;
-	if (length($friendly) >= 8)
+	my $friendly = (0+$_[0]);
+	if (length($friendly) >= 12)
 	{
-		$friendly = $friendly/1000;
-		$friendly .= 'T';
+		$friendly = $friendly/1000000000000;
+		$friendly .= ' T';
 	}
-	elsif (length($friendly) >= 6)
+	elsif (length($friendly) >= 9
 	{
-		$friendly = $friendly/1000;
-		$friendly .= 'G';
+		$friendly = $friendly/1000000000;
+		$friendly .= ' G';
+	}
+	elsif (length($friendly) >= 7)
+	{
+		$friendly = $friendly/1000000;
+		$friendly .= ' M';
 	}
 	elsif (length($friendly) >= 4)
 	{
 		$friendly = $friendly/1000;
-		$friendly .= 'M';
-	}
-	elsif (length($friendly) >= 2)
-	{
-		$friendly = $friendly/1000;
-		$friendly .= 'K';
+		$friendly .= ' K';
 	}
 	else
 	{
-		$friendly .= '';
+		$friendly .= ' ';
 	}
 	return $friendly;
 }
