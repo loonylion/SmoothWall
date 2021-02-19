@@ -10,10 +10,10 @@ use lib "/usr/lib/smoothwall";
 use header qw( :standard );
 
 my %DETAILS;
-&readhash("/var/smoothwall/mods/whatmask/DETAILS", \%DETAILS);
+&readhash("/var/smoothwall/whatmask/DETAILS", \%DETAILS);
 
 my %cgiparams;
-my (@addrs, my @vars);
+my (@addrs, @vars);
 my $addr;
 my $var;
 my $infomessage = '';
@@ -79,7 +79,7 @@ END
 			if (&validipormask($addr)) {
 				&openbox("${addr}");
 				print "<PRE>\n";
-					system("/var/smoothwall/mods/whatmask/bin/whatmask", $addr);
+					system("/bin/whatmask", $addr);
 				print "</PRE>";
 				&closebox();
 		}	}
