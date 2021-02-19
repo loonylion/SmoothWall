@@ -30,10 +30,15 @@ if [ -f /var/run/STARTSTOP ]; then
         flowid :1
 
       # Block all other traffic
+      #/usr/sbin/tc filter add dev $i parent ffff: \
+      #  protocol ip prio 50 \
+      #  u32 match ip src 0.0.0.0/0 \
+      #  police mtu 1 drop flowid :1
       /usr/sbin/tc filter add dev $i parent ffff: \
         protocol ip prio 50 \
         u32 match ip src 0.0.0.0/0 \
-        police mtu 1 drop flowid :1
+        flowid :1 police rate 1bps burst 1 mpu 0 action drop
+      #  police mtu 1 drop flowid :1
     fi
   done
 
