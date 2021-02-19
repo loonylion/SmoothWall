@@ -1,8 +1,10 @@
 AuthName "Restricted"
 AuthType Basic
+AuthBasicProvider file
 AuthUserFile /var/smoothwall/auth/users
+require valid-user
 
-<Files applet.conf>
-require user admin
-</Files>
+#<Files applet.conf>
+#require user admin
+#</Files>
 

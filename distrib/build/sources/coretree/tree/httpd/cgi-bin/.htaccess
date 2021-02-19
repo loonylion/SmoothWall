@@ -1,5 +1,6 @@
 AuthName "Restricted"
 AuthType Basic
+AuthBasicProvider file
 AuthUserFile /var/smoothwall/auth/users
 
 <Files dial.cgi>
