@@ -19,7 +19,6 @@ my $title = 'Smoothwall Express 3.2 Credits';
 
 &openpage('SWE 3.2 Credits'."$title", 1, , 'about your smoothie');
 &openbigbox('100%', 'LEFT');
-&alertbox($errormessage);
 
 &openbox("SWE Credits:");
 
@@ -33,7 +32,7 @@ print <<END
 	<th class='list' style='width: 40%;'>Contribution (if specified)</th>
 	<th class='list' style='width: 5%;'></th>
 </tr>
-<tr><td>Alasak</td><td></td><td>Original author of Smoothwall</td></tr>
+<tr><td>Aslak</td><td></td><td>Original author of Smoothwall</td></tr>
 <tr><td>Fest3er</td><td></td><td>SWE Team Lead and Principle Developer</td></tr>
 <tr><td>ShorTie</td><td></td><td>Author/Maintainer of RPi/ARM port and updated many packages, 3.2 was based off of his work.</td></tr>
 <tr><td>S-T-P</td><td></td><td>Author of integrated FFC mod</td></tr>
