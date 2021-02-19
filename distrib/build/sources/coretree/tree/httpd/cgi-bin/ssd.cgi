@@ -34,23 +34,32 @@ $cgiparams{'ACTION'} = " " ;
 ########################
 
 my @options = ("Disabled","Enabled","Forced");
-my isEnabled = exists({$swroot}/ssdtrim/enabled);
-my isForced = exists({$swroot}/ssdtrim/forced);
-my isSupported = exists({$swroot}/ssdtrim/supported);
-if (isEnabled && isSupported){
-	my status = 'Enabled'; }
-else if (isEnabled && !isSupported){
-	my status = 'Forced';}
-	
-else{ my status = 'Disabled';}
-my currentsetting = $status;
-if (isSupported) {
-	my supportDisplay = '<font colour="green"><strong>Supported</strong></font>';
-	}
-	else
-	{
-	my supportDisplay = '<font colour="red"><strong>Not Supported</strong></font>';
-	}
+my $isEnabled = -e "/var/smoothwall/ssdtrim/enabled";
+my $isForced = -e "/var/smooothwall/ssdtrim/forced";
+my $isSupported = -e "/var/smoothwall/ssdtrim/supported";
+my $status = 'Disabled';
+if ($isEnabled && $isSupported)
+{
+	status = 'Enabled'; 
+}
+elsif ($isEnabled && !$isSupported)
+{
+	status = 'Forced';
+}
+else
+{
+	my status = 'Disabled';
+}
+my $currentsetting = $status;
+my $supportDisplay;
+if ($isSupported) 
+{
+	$supportDisplay = '<font colour="green"><strong>Supported</strong></font>';
+}
+else
+{
+	$supportDisplay = '<font colour="red"><strong>Not Supported</strong></font>';
+}
 
 &showhttpheaders();
 
@@ -63,10 +72,10 @@ if (isSupported) {
 
    print "<h2>Current Status</h2>";
 
-print "Your drive reports that Trim is:",$supportDisplay,"<br/>";
-if (!isSupported)
+print "Your drive reports that Trim is: ",$supportDisplay,"<br/>";
+if (!$isSupported)
 {
-print "Not all SSDs that support Trim report it correctly, or the detection may have been wrong. Some rotating HDDs also report Trim support (DM-SMR drives) when they shouldn't.<br/>if you KNOW you have an SSD that you KNOW supports Trim, set the option to 'Forced' <br/>Do NOT do this on a rotating HDD <br/>Also not advisable on CF/SD/mSD/USB sticks etc as these generally don't do trim";
+print "Not all SSDs that support Trim report it correctly, or the detection may have been wrong. Some rotating HDDs also report Trim support (DM-SMR drives) when they shouldn't.<br/>if you KNOW you have an SSD that you KNOW supports Trim, set the option to 'Forced' <br/>Do NOT do this on a rotating HDD <br/>Also not advisable on CF/SD/mSD/USB sticks etc as these generally don't do trim<br/>";
 }
 print "FS Trim is: ",$status,"<br/>";
 
