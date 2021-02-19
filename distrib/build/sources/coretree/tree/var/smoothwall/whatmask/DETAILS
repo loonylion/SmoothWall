@@ -1,0 +1,7 @@
+MOD_NAME=whatmask
+MOD_LONG_NAME=[3.1] whatmask
+MOD_DIR=/var/smoothwall/mods/whatmask
+MOD_VERSION=SW3.1-V0.0.1
+MOD_INFO=Subnet mask, CIDR, wildcard bit conversion utility.
+MOD_FORUM=http://community.smoothwall.org/forum/viewtopic.php?f=26&t=24652
+
