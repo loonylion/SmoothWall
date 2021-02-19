@@ -23,7 +23,7 @@ NOT_DRIVERS = drivers/gpu drivers/parport drivers/scsi/fcoe \
 	      drivers/watchdog drivers/edac drivers/regulator \
 	      drivers/video net/netfilter net/ipsec \
 	      net/sched net/sctp net/bluetooth \
-	      net/ax25 net/wimax net/cfrm drivers/accessibility drivers/android drivers/auxdisplay drivers/fpga drivers/gnss drivers/nfc drivers/pcmcia drivers/atm drivers/infiniband drivers/scsi/pcmcia drivers/macintosh drivers/staging/android drivers/staging/media drivers/staging/xgifb drivers/input/joystick drivers/input/tablet drivers/input/touchscreen drivers/input/mouse drivers/input/gameport net/appletalk net/batman-adv net/bpfilter net/6lowpan net/decnet net/nfc net/x25 net/9p net/dccp net/rose net/rdsnet/sctp net/dsa drivers/isdn drivers/net/hamradio drivers/net/wimax
+	      net/ax25 net/wimax net/cfrm drivers/accessibility drivers/android drivers/auxdisplay drivers/fpga drivers/gnss drivers/nfc drivers/pcmcia drivers/atm drivers/infiniband drivers/scsi/pcmcia drivers/macintosh drivers/staging/android drivers/staging/media drivers/staging/xgifb drivers/input/joystick drivers/input/tablet drivers/input/touchscreen drivers/input/mouse drivers/input/gameport net/appletalk net/batman-adv net/bpfilter net/6lowpan net/decnet net/nfc net/x25 net/9p net/dccp net/rose net/rdsnet/sctp net/dsa drivers/isdn drivers/net/hamradio drivers/net/wimax drivers/w1
 
 NOT_SHARE = locales/[a-d]* locales/e[o-z]* locales/[e-z]* doc info man readline
 NOT_USR = include info man
