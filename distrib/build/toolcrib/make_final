@@ -211,7 +211,7 @@ fi
       build dialog
       build newt
       build gd
-      ln -s buildroot/python/usr/bin/python3 buildroot/python/usr/bin/python
+      #ln -s buildroot/python/usr/bin/python3 buildroot/python/usr/bin/python
       touch crumbs/Final.grp2.compiled
     fi
 
@@ -369,7 +369,7 @@ fi
       build wireless-regdb
 
       build wireless_tools
-      build setuptools
+      #build setuptools
       #build M2Crypto
       
       build libgpg-error
@@ -452,7 +452,8 @@ fi
       build pv
       build FFC
       build GAR
-      #build infnoise-trng
+      build infnoise-trng
+      #build infnoise-openssl
       build ookla-speedtest
 
       touch crumbs/Final.grp6.compiled
