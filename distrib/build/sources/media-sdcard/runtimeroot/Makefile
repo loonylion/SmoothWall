@@ -15,7 +15,8 @@ SWE_PKGS = busybox eudev kmod pciutils bash util-linux \
 	   e2fsprogs zlib xz module-init-tools sysvinit libelf linux-firmware $(GRUB)
 
 
-# Stuff that shouldn't be needed in the initramfs net/bridge drivers/gpio
+# Stuff that shouldn't be needed in the initramfs, drivers/gpio net/bluetooth
+# some net drivers removed: >10gbit, wlan,bluetooth,wimax, some chelsio 10gbit removed because theres no firmware so they wont work
 NOT_DRIVERS = drivers/gpu drivers/parport drivers/scsi/fcoe \
 	      drivers/scsi/fnic drivers/scsi/osd drivers/scsi/libfc \
 	      drivers/scsi/cxgbi drivers/scsi/be2iscsi drivers/scsi/bfa \
@@ -23,7 +24,10 @@ NOT_DRIVERS = drivers/gpu drivers/parport drivers/scsi/fcoe \
 	      drivers/watchdog drivers/edac drivers/regulator \
 	      drivers/video net/netfilter net/ipsec \
 	      net/sched net/sctp net/bluetooth \
-	      net/ax25 net/wimax net/cfrm drivers/accessibility drivers/android drivers/auxdisplay drivers/fpga drivers/gnss drivers/nfc drivers/pcmcia drivers/atm drivers/infiniband drivers/scsi/pcmcia drivers/macintosh drivers/staging/android drivers/staging/media drivers/staging/xgifb drivers/input/joystick drivers/input/tablet drivers/input/touchscreen drivers/input/mouse drivers/input/gameport net/appletalk net/batman-adv net/bpfilter net/6lowpan net/decnet net/nfc net/x25 net/9p net/dccp net/rose net/rdsnet/sctp net/dsa drivers/isdn drivers/net/hamradio drivers/net/wimax drivers/w1
+	      net/ax25 net/wimax net/cfrm drivers/accessibility drivers/android drivers/auxdisplay drivers/fpga drivers/gnss drivers/nfc drivers/pcmcia drivers/atm drivers/infiniband drivers/scsi/pcmcia drivers/macintosh drivers/staging/android drivers/staging/media drivers/staging/xgifb drivers/input/joystick drivers/input/tablet drivers/input/touchscreen drivers/input/mouse drivers/input/gameport net/appletalk net/batman-adv net/bpfilter net/6lowpan net/decnet net/nfc net/x25 net/9p net/dccp net/rose net/rds net/dsa drivers/isdn drivers/net/hamradio drivers/net/wimax drivers/w1 drivers/sound drivers/net/ethernet/mellanox/mlx5 drivers/net/ethernet/mellanox/mlxsw drivers/net/ethernet/intel/i40e drivers/net/ethernet/chelsio/cxgb4 drivers/net/ethernet/chelsio/cxgb4vf
+
+#these are mostly wifi, but theres a few completely unrelated/unnecessary stuff as well: korg, yamaha, ess, emi* are soundcards, cis are pcmcia cards, ql2*_fw.bin files are for a qlogic fibre channel controller	      
+NOT_FIRMWARE = yamaha korg libertas rtlwifi iwlwifi*.ucode ess emi26 emi62 mrvl rtw88 cis rt*.bin brcm ti-connectivity ar3k ath6k ath10k ath11k ar5523.bin carl9170.fw wsm_22.bin wil6210.* agere_*_fw.bin cbfw-3.2.5.1.bin ctfw-3.2.5.1.bin ct2fw-3.2.5.1.bin mt7601u.bin mt7662* mediatek ositech mwl8k ql2*_fw.bin
 
 NOT_SHARE = locales/[a-d]* locales/e[o-z]* locales/[e-z]* doc info man readline
 NOT_USR = include info man
@@ -129,6 +133,7 @@ endif
 	@echo "        Clean to shrink the initramfs" >>$(MEDIA_BUILD_OUT)
 	@echo; echo; echo "Clean extra stuff to shrink the initramfs"
 	@for i in tmp/lib/modules/*; do (cd "$$i/kernel"; rm -rvf $(NOT_DRIVERS)); done
+	@cd tmp/lib/firmware; rm -rvf $(NOT_FIRMWARE)
 	@cd tmp/usr/share; rm -rf $(NOT_SHARE)
 	@cd tmp/usr; rm -rf $(NOT_USR)
 	@cd tmp; find . -name lib\*a -exec rm {} \;
