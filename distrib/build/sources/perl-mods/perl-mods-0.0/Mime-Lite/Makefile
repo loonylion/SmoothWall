@@ -6,8 +6,8 @@
 
 include ../../../Makefile.conf
 
-PACKAGE = Mime-Types
-VERSION = 3.030
+PACKAGE = MIME-Lite
+VERSION = 3.031
 
 BASE_URL = http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/
 CONFIGURE = yes
