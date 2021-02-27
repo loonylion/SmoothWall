@@ -68,8 +68,8 @@ INST_PKGS = glibc libsmooth+setup libgcc freetype libpng libdnet \
 	    strace rrdtool cron tcpdump dnsmasq ntp openntpd hdparm hddtemp \
 	    iproute2 gd expat ethtool listtables inotify-tools \
 	    beep2 pcre trafficstats iftop setuids ppp rp-pppoe infnoise-trng\
-	    ibod dhcpcd dhcp snort rng-tools haveged ookla-speedtest\
-	    oinkmaster libreswan wireless_tools wpa_supplicant imspector diffutils clamav \
+	    ibod dhcpcd dhcp radvd snort rng-tools haveged ookla-speedtest\
+	    oinkmaster libreswan wireless_tools wpa_supplicant imspector diffutils clamav SWE_cpupower \
 	    p3scan siproxd which miniupnpd ez-ipupdate noip \
 	    smartmontools at dosfstools linux-atm \
 	    mtools nano reiserfsprogs parted xtables-addons cpio dialog \
