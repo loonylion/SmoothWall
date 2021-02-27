@@ -31,42 +31,45 @@ $cgiparams{'ACTION'} = " " ;
 &getcgihash(\%cgiparams);
 &get_prefs_from_cgi();
 
-if (!exists("/tmp/speedtest"))
+if (! -e "/tmp/speedtest")
 {
-	my $result = exec("speedtest --accept-license --accept-gdpr --ca-certificate=/usr/lib/ssl/certs/ca-certificates.crt -f csv >/tmp/speedtest");
+	system("/usr/bin/run_speedtest.sh &");
 	&showhttpheaders();
-	&openpage($tr{'Speedtest'}."$title", 1, '<META REFRESH="20" <META HTTP-EQUIV="Cache-Control" content="no-cache"> <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> ', 'about your smoothie');
+	&openpage($tr{'Speedtest'}."$title", 1, '<META HTTP-EQUIV="refresh" content="20"><META HTTP-EQUIV="Cache-Control" content="no-cache"> <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> ', 'about your smoothie');
 
 &openbigbox('100%', 'LEFT');
-&alertbox($errormessage);
+#&alertbox($errormessage);
 
    &openbox($tr{'Speedtest'});
 
    print "<h2>Speedtest in progress, reloading page in 20 seconds</h2>";
    &closebox();
 
-&alertbox('add','add');
+#&alertbox('add','add');
 &closebigbox();
 &closepage();
 }
-
+else {
 ########################
 #      vars			   #
 ########################
 
-my @results = split(',',`cat /tmp/speedtest`);
+my $resultstring = `cat /tmp/speedtest`;
+$resultstring =~ s|\"||g;
+my @results = split(',',$resultstring);
+
 
 &showhttpheaders();
 
 &openpage($tr{'Speedtest'}."$title", 1, ' <META HTTP-EQUIV="Cache-Control" content="no-cache"> <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> ', 'about your smoothie');
 
 &openbigbox('100%', 'LEFT');
-&alertbox($errormessage);
+#&alertbox($errormessage);
 
    &openbox($tr{'Speedtestc'});
 
    print "<h2>Speedtest Results:</h2>";
-print "<p>Speedtest server: ",@results[1],"</p><br/>";
+print "<p>Speedtest server: ",@results[0],"</p><br/>";
 print "<table><tr><th rowspan=\"2\">Latency (ms)</th><th rowspan=\"2\">Jitter (ms)</th><th rowspan=\"2\">Packet Loss</th><th colspan=\"2\">Download</th><th colspan=\"2\">Upload</th></tr>
 <tr><th>Speed</th><th>Bytes</th><th>Speed</th><th>Bytes</th></tr>";
 print "<tr><td>",@results[2],"</td><td>",@results[3],"</td><td>",@results[4]," </td><td>",friendly_numbers(@results[5]),"bytes/sec</td><td>",friendly_numbers(@results[7]),"bytes</td><td>",friendly_numbers(@results[6]),"bytes/sec</td><td>",friendly_numbers(@results[8]),"bytes</td></tr></table></div>";
@@ -79,10 +82,10 @@ print "<tr><td>",@results[2],"</td><td>",@results[3],"</td><td>",@results[4]," <
  	
 #	&closebox();
 
-&alertbox('add','add');
+#&alertbox('add','add');
 &closebigbox();
 &closepage();
-
+}
 
 ###############################################
 #             logic functions                 #
@@ -96,7 +99,7 @@ sub friendly_numbers
 		$friendly = $friendly/1000000000000;
 		$friendly .= ' T';
 	}
-	elsif (length($friendly) >= 9
+	elsif (length($friendly) >= 9)
 	{
 		$friendly = $friendly/1000000000;
 		$friendly .= ' G';
