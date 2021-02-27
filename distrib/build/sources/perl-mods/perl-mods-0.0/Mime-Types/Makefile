@@ -6,7 +6,7 @@
 
 include ../../../Makefile.conf
 
-PACKAGE = Mime-Types
+PACKAGE = MIME-Types
 VERSION = 2.11
 
 BASE_URL = http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV
