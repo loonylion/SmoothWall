@@ -6,8 +6,8 @@
 
 include ../../../Makefile.conf
 
-PACKAGE = Geo-Ip-PurePerl
-VERSION = 1.25
+PACKAGE = Geo-IP-PurePerl
+VERSION = 1.26
 
 BASE_URL = http://search.cpan.org/CPAN/authors/id/B/BO/BORISZ/
 
