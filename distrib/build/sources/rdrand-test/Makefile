@@ -16,15 +16,13 @@ COMPILE = yes
 INSTALL = yes
 
 download:
-	wget $(BASE_URL)$(PACKAGE)$(EXTENSION) -O $(PACKAGE)$(EXTENSION)
+	wget $(BASE_URL)$(PACKAGE)$(EXTENSION) -O $(DOWNLOADS_DIR)/$(PACKAGE)$(EXTENSION)
+	
 
 compile:
-	#mv $(DOWNLOADS_DIR)/download_file?file_path=%2Fookla-speedtest-1.0.0-x86_64-linux ($(DOWNLOADS_DIR)/$(PACKAGE)-$(VERSION).tgz
-	@true
+	unzip -b $(DOWNLOADS_DIR)/$(PACKAGE)$(EXTENSION) -d sources/coretree/tree/var/smoothwall/rdrand-test -x *.c
 	
 install:
-	#mkdir -p $(PKG_ROOT)/usr/bin
-	#mv speedtest $(PKG_ROOT)/usr/bin
 	@true
 	
 include ../Makefile.rules
