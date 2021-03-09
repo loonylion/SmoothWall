@@ -17,22 +17,34 @@ GAR_URL = https://github.com/wkitty42/GAR/archive/master/GAR-$(VERSION).tar.gz
 
 DOWNLOAD = yes
 download:
-	@echo; echo; echo "download"; echo
+	#wget -o GAR-$(VERSION).tar.gz $(GAR_URL)
+	#@echo; echo; echo "download"; echo
 	echo "cloning git hub"
-	mkdir -vp $(PKG_ROOT)/var/smoothwall/mods-available
-	cd $(PKG_ROOT)/var/smoothwall/mods-available; git clone https://github.com/wkitty42/GAR
-	cp -v GAR.diff $(PKG_ROOT)/var/smoothwall/mods-available/GAR/usr/bin
-	cd $(PKG_ROOT)/var/smoothwall/mods-available/GAR/usr/bin; patch < GAR.diff
+	#mkdir -vp $(PKG_ROOT)/var/smoothwall/mods-available
+	#cd $(PKG_ROOT)/var/smoothwall/mods-available; git clone http://github.com/wkitty42/GAR
+	#cp -v GAR.diff $(PKG_ROOT)/var/smoothwall/mods-available/GAR/usr/bin
+	#cd $(PKG_ROOT)/var/smoothwall/mods-available/GAR/usr/bin; patch < GAR.diff
+	rm -rf var/smoothwall/mods-available
+	mkdir -vp var/smoothwall/mods-available
+	cd var/smoothwall/mods-available; git clone http://github.com/wkitty42/GAR
+	cp -v GAR.diff var/smoothwall/mods-available/GAR/usr/bin
+	cd var/smoothwall/mods-available/GAR/usr/bin; patch < GAR.diff
+	touch $(DOWNLOADS_DIR)GAR-$(VERSION).tar.gz.done
 
 CONFIGURE = yes
 configure: download
+	#tar -xzf GAR-$(VERSION).tar.gz $(PKG_ROOT)
+	echo $(PWD)
+	#tar -xzf downloads/GAR-$(VERSION).tar.gz $(PKG_ROOT)
 	@echo; echo "configure/prepare smoothd"
+	rm -rf smoothd
 	mkdir -v smoothd
 	cp -v ../smoothd/smoothd-0.0/*.h smoothd
 	cp -v ../smoothd/smoothd-0.0/*.cpp smoothd
 	cp -v ../smoothd/smoothd-0.0/*.hpp smoothd
 	cp -v ../smoothd/smoothd-0.0/default smoothd
-	cp -v $(PKG_ROOT)/var/smoothwall/mods-available/GAR/src/sysGAR.cpp smoothd
+	#cp -v $(PKG_ROOT)/var/smoothwall/mods-available/GAR/src/sysGAR.cpp smoothd
+	cp -v var/smoothwall/mods-available/GAR/src/sysGAR.cpp smoothd
 	cp -v Makefile.GAR smoothd/Makefile
 
 COMPILE = yes
@@ -43,6 +55,12 @@ compile: configure
 INSTALL = yes
 install: compile
 	@echo; echo "install our sysGAR.so, install.sh, install-gar.pl && stopsquid"
+	mkdir -vp $(PKG_ROOT)/var/smoothwall/mods-available/GAR/usr/bin/smoothwall
+	#mkdir -vp $(PKG_ROOT)/var/smoothwall/mods-available/GAR/usr/lib/smoothd
+	#mkdir -vp $(PKG_ROOT)/var/smoothwall/mods-available/GAR/etc
+	#mkdir -vp $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log
+	#mkdir -vp $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/db
+	cp -R var/ $(PKG_ROOT)
 	install -v -m 0644 settings $(PKG_ROOT)/var/smoothwall/mods-available/GAR
 	install -v -m 0755 install.sh $(PKG_ROOT)/var/smoothwall/mods-available/GAR
 	install -v -m 0755 uninstall.sh $(PKG_ROOT)/var/smoothwall/mods-available/GAR
@@ -97,12 +115,12 @@ install: compile
 	cd $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log; chown -v nobody:nobody snortstats.err
 	cd $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log; chown -v nobody:nobody snortstats.log
 
-#	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{GAR.log.1.gz,GAR.log.2.gz,GAR.log.3.gz}
-#	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{GAR.log.4.gz,GAR.log.5.gz,GAR.log.6.gz}
-#	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{GAR.log.7.gz,GAR.log.8.gz}
-#	cd $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log; chown -v nobody:nobody GAR.log.*.gz
-#	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{snortstats.err.1.gz,snortstats.err.2.gz}
-#	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{snortstats.err.3.gz,snortstats.err.4.gz}
+	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{GAR.log.1.gz,GAR.log.2.gz,GAR.log.3.gz}
+	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{GAR.log.4.gz,GAR.log.5.gz,GAR.log.6.gz}
+	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{GAR.log.7.gz,GAR.log.8.gz}
+	cd $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log; chown -v nobody:nobody GAR.log.*.gz
+	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{snortstats.err.1.gz,snortstats.err.2.gz}
+	touch $(PKG_ROOT)/var/smoothwall/mods-available/GAR/var/log/{snortstats.err.3.gz,snortstats.err.4.gz}
 
 CLEAN = yes
 clean:
