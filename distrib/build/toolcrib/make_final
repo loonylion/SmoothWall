@@ -127,13 +127,13 @@ fi
       build gawk
       build ncurses
       build m4
+      build flex
       build bison
       build less
       build groff
       build man
       build man-pages
       build sed
-      build flex
       build dejagnu
       build autoconf
       build automake
@@ -298,6 +298,7 @@ fi
       echo
       echo -e "  Final group 5 packages (core)"
       build cpufrequtils
+      build cpupower
       build usbutils
       build pciutils
       build hdparm
@@ -329,6 +330,7 @@ fi
       build trafficstats
       build setuids
       build install
+      build rdrand-test
       build coretree
 
       build openssh
@@ -360,6 +362,7 @@ fi
       build busybox
 	  build htop
       build dhcp
+      build radvd
       build nghttp2
       build snort
       build oinkmaster
@@ -409,6 +412,9 @@ fi
       build grub
       build rng-tools
       build haveged
+      #build libuv
+      #build libarchive
+      #build cmake
    elif [ "$mTUPLE" == "pi0w" ] || [ "$mTUPLE" == "rpi2" ] \
 			|| [ "$mTUPLE" == "rpi3" ] || [ "$mTUPLE" == "pi3-64" ] \
 			|| [ "$mTUPLE" == "rpi4" ] || [ "$mTUPLE" == "pi4-64" ]; then
@@ -453,6 +459,7 @@ fi
       build FFC
       build GAR
       build infnoise-trng
+      #build libftdi1
       #build infnoise-openssl
       build ookla-speedtest
 
