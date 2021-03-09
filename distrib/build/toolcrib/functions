@@ -213,7 +213,11 @@ function cpu_count() {
 
   if egrep -i "^physical id" /proc/cpuinfo >/dev/null 2>&1; then
     phy_max=`egrep -i "^physical id" /proc/cpuinfo|sed -e 's/.*: //'|sort|tail -1`+1
-    cor_max=`egrep -i "^core id" /proc/cpuinfo|sed -e 's/.*: //'|sort|tail -1`+1
+	if egrep -i "^siblings" /proc/cpuinfo >/dev/null 2>&1; then
+		cor_max=`egrep -i "^siblings" /proc/cpuinfo|sed -e 's/.*: //'|sort|tail -1`
+	else
+		cor_max=`egrep -i "^core id" /proc/cpuinfo|sed -e 's/.*: //'|sort|tail -1`+1
+	fi
     cpus=`egrep -i "^processor" /proc/cpuinfo|sed -e 's/.*: //'|sort|tail -1`+1
     cores=cor_max*phy_max
   else
